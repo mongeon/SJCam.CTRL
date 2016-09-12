@@ -23,6 +23,9 @@ namespace SJCam.CTRL.ViewModels
             get { return _Camera; }
             set { SetProperty(ref _Camera, value); }
         }
+
+
+
         public ICommand ActionCommand
         {
             get { return _ActionCommand; }
@@ -100,14 +103,26 @@ namespace SJCam.CTRL.ViewModels
         }
 
         public async Task<CameraMode> ChangeMode(CameraMode mode)
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync($"{_Camera.Url}?custom=1&cmd={_Camera.ModeCommand}&par={(int)mode}");
-            _Refresher.Refresh();
 
-            if (response.IsSuccessStatusCode)
+        {
+            try
             {
-                Camera.CameraMode = mode;
-                return Camera.CameraMode;
+
+                HttpResponseMessage response = await _httpClient.GetAsync($"{_Camera.Url}?custom=1&cmd={_Camera.ModeCommand}&par={(int)mode}");
+                _Refresher.Refresh();
+                if (response.IsSuccessStatusCode)
+                {
+                    Camera.CameraMode = mode;
+                    return Camera.CameraMode;
+                }
+            }
+            
+            catch (System.Exception Ex)
+            {
+
+
+                return CameraMode.Unknown;
+                
             }
 
 
@@ -117,7 +132,7 @@ namespace SJCam.CTRL.ViewModels
         public async Task<CameraMode> TakePhoto()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"{_Camera.Url}?custom=1&cmd={_Camera.SnapPhotoCommand}");
-            _Refresher.Refresh();
+            
 
             if (response.IsSuccessStatusCode)
             {
@@ -131,7 +146,7 @@ namespace SJCam.CTRL.ViewModels
         {
             int commandParameter = _Camera.IsVideoRecording ? _Camera.StopVideoParameter : _Camera.StartVideoParameter;
             HttpResponseMessage response = await _httpClient.GetAsync($"{_Camera.Url}?custom=1&cmd={_Camera.VideoCommand}&par={commandParameter}");
-            _Refresher.Refresh();
+            
 
             if (response.IsSuccessStatusCode)
             {

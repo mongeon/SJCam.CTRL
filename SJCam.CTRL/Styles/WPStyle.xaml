@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SJCamCTRL.Styles">
+    xmlns:local="using:SJCam.CTRL.Styles">
 
     <Style TargetType="TextBlock" x:Key="BaseTextBlock" >
         <Setter Property="Margin" Value="4"/>
@@ -11,6 +11,6 @@
     </Style>
     <Style TargetType="TextBlock"  BasedOn="{StaticResource BaseTextBlock}" x:Key="Label"  >
         <Setter Property="FontWeight" Value="Bold"/>
-        
+
     </Style>
 </ResourceDictionary>

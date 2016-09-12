@@ -10,7 +10,7 @@ namespace SJCam.CTRL
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        SJCam.CTRL.ViewModels.SJCamViewModel _MainViewModel = new SJCam.CTRL.ViewModels.SJCamViewModel();
+        SJCam.CTRL.ViewModels.MainPageViewModel _MainViewModel = new SJCam.CTRL.ViewModels.MainPageViewModel();
 
         public MainPage()
         {
